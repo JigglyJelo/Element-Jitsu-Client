@@ -1,54 +1,33 @@
-# React + TypeScript + Vite
+# Element-Jitsu (Client)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Play at:** https://jigglyjelo.github.io/Element-Jitsu-Client/
 
-Currently, two official plugins are available:
+A multiplayer web game built with React and Vite. Players can create lobbies, join matches, and battle opponents with strategic elemental moves.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This repository contains the frontend client. The backend Socket.IO server repository can be found here: https://github.com/JigglyJelo/Element-Jitsu-Server
 
-## Expanding the ESLint configuration
+## Tech Stack
+* **Framework:** React + TypeScript
+* **Build Tool:** Vite
+* **Real-Time Communication:** Socket.IO-Client
+* **Deployment:** GitHub Pages (Automated via GitHub Actions)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Local Development
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+To run this project locally alongside the server, just use standard NPM commands:
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> **Local Testing:** By default, the Vite dev environment (`npm run dev`) automatically points the Socket.IO client to `http://localhost:3000` to communicate with your local backend.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Deployment
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+This project is automatically deployed to **GitHub Pages** using a GitHub Actions workflow whenever code is pushed to the `main` branch. 
+
+When built for production, the app automatically switches its connection URL to communicate with the live backend hosted on Render. 
+
+## License
+
+This project is licensed under the **GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later)**. See the LICENSE file for details.
