@@ -1,0 +1,189 @@
+/* src/components/ElementCard.css */
+
+/* ──────────────────────────────────────────────────────────────
+   The outer card: always tall and centers icon+available by default
+────────────────────────────────────────────────────────────── */
+
+.element-card {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  /* each card is one‐third of container width minus gaps */
+  width: calc((100% - 2rem) / 3);
+  min-height: 260px;         /* keeps all cards tall from the start */
+  padding: 0.75rem;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* center icon + “Available” vertically */
+  align-items: center;
+
+  position: relative;        /* allow absolute positioning of slider/button */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.element-card:not(.selected) {
+  cursor: pointer;
+}
+
+/* When a card is selected, force a default (arrow) cursor */
+.element-card.selected {
+  cursor: default;
+}
+
+/* When selected, highlight border & shadow—but DO NOT change justify-content */
+.element-card.selected {
+  border-color: #007bff;
+  box-shadow: 0 2px 8px rgba(0,123,255,0.2);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Icon container (always at “logical top” of card, but card uses
+   justify-content:center so it appears vertically centered)
+────────────────────────────────────────────────────────────── */
+.element-icon-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.element-icon {
+  font-size: 1.75rem;
+}
+
+/* “Available: X” below the icon */
+.available-row {
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Slider + “current / max” (hidden by default, shown when .selected)
+   We’ll position it just above the button.
+────────────────────────────────────────────────────────────── */
+.slider-row {
+  display: none;             /* hide when not selected */
+  align-items: center;
+  width: calc(100% - 1.5rem); /* full width minus padding */
+  margin: 0 auto;
+  position: absolute;
+  bottom: 3.5rem;            /* a bit above the bottom for the button */
+}
+
+/* Make the track take ~90% of card width, leaving room for “X / Y” */
+.element-slider {
+  width: 90%;
+  margin-right: 0.25rem;
+  accent-color: #007bff;
+}
+
+.power-display {
+  font-size: 0.9rem;
+  font-weight: bold;
+  min-width: 2.5rem;         /* prevents “0 / 10” from wrapping */
+  text-align: right;
+}
+
+/* When the card is “selected,” show the slider-row */
+.element-card.selected .slider-row {
+  display: flex;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   “Choose” button (hidden by default, then pinned at bottom when selected)
+────────────────────────────────────────────────────────────── */
+.choose-button {
+  display: none;             /* hide unless .selected */
+  width: calc(100% - 1.5rem);/* full width minus padding */
+  margin: 0 auto;
+  padding: 0.75rem;          /* normal button height */
+  font-size: 1rem;
+  box-sizing: border-box;
+  text-align: center;
+  position: absolute;
+  bottom: 0.75rem;           /* pinned 0.75rem above card’s bottom edge */
+  left: 0.75rem;
+}
+
+/* When selected, reveal/pin the button */
+.element-card.selected .choose-button {
+  display: block;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   If you need any hover effect, you can add it here
+────────────────────────────────────────────────────────────── */
+
+.element-card:not(.selected):hover {
+  border-color: #007bff;
+  background: #e2e2e2;
+}
+
+/* src/components/ElementCard.css */
+.mobile-power-controls {
+  display: none;            /* keep hidden by default */
+  position: absolute;
+  bottom: 3.8rem;           /* tweak this value to sit just above the bar */
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 1.5rem); /* match your slider width */
+  pointer-events: none;     /* so clicks pass through empty areas */
+}
+.mobile-power-controls .power-btn {
+  pointer-events: all;      /* only buttons remain clickable */
+}
+
+.element-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.element-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.element-name {
+  margin-top: 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+
+/* show on small screens instead of the slider */
+@media (max-width: 650px) {
+  .slider-row {
+    display: none;
+  }
+  .available-row {
+    margin-bottom: 2.5rem;
+  }
+  .element-slider{
+    display: none;
+  }
+  .power-display {
+    display: none;
+  }
+  .mobile-power-controls {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px){
+  .mobile-power-controls .power-btn {
+    width: 50%;     /* only buttons remain clickable */
+  }
+}

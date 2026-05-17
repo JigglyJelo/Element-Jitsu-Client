@@ -1,0 +1,152 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Make the game‐screen fill the viewport without scrolling
+───────────────────────────────────────────────────────────────────────────── */
+.game-screen {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  padding-top: 4rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Bottom-aligned card container (unchanged)
+───────────────────────────────────────────────────────────────────────────── */
+.element-card-container {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  width: calc(100% - 2rem);
+  max-width: 960px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 650px) {
+  .element-card-container {
+    width: calc(100%);
+    gap: 0.5rem;
+    justify-content: center;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Reveal area: center two large WinCards side by side
+   → Use fixed so it won’t be clipped by .game-screen overflow
+───────────────────────────────────────────────────────────────────────────── */
+.reveal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 2rem;
+  z-index: 5;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Each reveal “slot” holds either a WinCard or a placeholder
+───────────────────────────────────────────────────────────────────────────── */
+.reveal-slot {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Placeholder box when opponent (or you) hasn’t chosen yet
+───────────────────────────────────────────────────────────────────────────── */
+.win-card-placeholder {
+  width: 120px;
+  height: 120px;
+  background: #e2e2e2;
+  border: 2px dashed #aaa;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* “?” in placeholder when opponent has chosen but it’s still pick-phase */
+
+
+.placeholder-with-question {
+  position: relative;       /* for absolute‐positioning children */
+  background: #fff;
+  border: 2px solid #444;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* IMPORTANT: ensure border is included inside width/height */
+  box-sizing: border-box;
+}
+
+.placeholder-with-question .question-mark {
+  font-size: 3rem;
+  color: #000000;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   FLIP-CARD WRAPPER
+───────────────────────────────────────────────────────────────────────────── */
+.flip-card {
+  width: 120px;
+  height: 120px;
+  perspective: 800px; /* gives the 3D effect */
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+  /* start “unflipped” by default */
+  transform: rotateY(0deg);
+}
+
+.flip-card-inner.flipped {
+  /* when .flipped is added, rotate the inner container 180° around Y */
+  transform: rotateY(180deg);
+}
+
+/* Both faces occupy the same space; backface-visibility hides the “back” of each */
+.flip-card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+
+/* Back-face (initially visible): now shows “?” placeholder */
+.flip-card-back {
+  /* no extra rules needed—.flip-card-face already covers 100% */
+}
+
+/* Front-face (rotated 180° so it sits behind until flip) */
+.flip-card-front {
+  transform: rotateY(180deg);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Center and style the header (avoids overlap with scoreboards)
+───────────────────────────────────────────────────────────────────────────── */
+.game-screen h2 {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* ─*

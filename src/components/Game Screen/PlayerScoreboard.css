@@ -1,0 +1,134 @@
+/* src/components/PlayerScoreboard.css */
+
+/* ──────────────────────────────────────────────────────────────
+   The outer wrapper “pins” the scoreboard
+   to either top-left or top-right.
+────────────────────────────────────────────────────────────── */
+.player-scoreboard {
+  position: fixed;
+  top: 1rem;
+  width: auto;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  font-family: sans-serif;
+  z-index: 10;
+}
+
+.player-scoreboard.left {
+  left: 1rem;
+}
+
+.player-scoreboard.right {
+  right: 1rem;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Username styling (centered)
+────────────────────────────────────────────────────────────── */
+.ps-username {
+  text-align: center;
+  margin: 0 0 1rem 0;
+  font-size: 1.15rem;
+  color: #333;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Container for the three element blocks laid out horizontally
+────────────────────────────────────────────────────────────── */
+.ps-elements {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;               
+  justify-content: center; 
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Single element “block” (Fire / Water / Grass)
+────────────────────────────────────────────────────────────── */
+.ps-element-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;    
+  background: #fafafa;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Header row inside each element block
+   (icon, label, and points stacked vertically)
+────────────────────────────────────────────────────────────── */
+.ps-element-header {
+  display: flex;
+  flex-direction: column;    
+  align-items: center;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.ps-element-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.ps-element-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.25rem;    
+}
+
+.ps-element-points {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Stack of WinCard components
+────────────────────────────────────────────────────────────── */
+.ps-win-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;            
+}
+
+.win-card.small {
+  width: 56px;
+  height: 56px;
+}
+
+/* on small phones, each board only uses 40% of the screen */
+@media (max-width: 575px) {
+  .player-scoreboard {
+    width: 45vw;           /* each board is 40% of viewport width */
+    padding: 0.5rem;       /* tighter padding */
+  }
+
+  .win-card.small {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* tweak internal text so it still fits nicely */
+  .ps-username {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .ps-element-icon {
+    font-size: 1.25rem;
+  }
+  .ps-element-label {
+    font-size: 0.85rem;
+  }
+  .ps-element-points {
+    font-size: 0.8rem;
+  }
+  .ps-win-stack {
+    gap: 0.15rem;
+  }
+}

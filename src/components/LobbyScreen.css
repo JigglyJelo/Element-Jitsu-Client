@@ -1,0 +1,82 @@
+/* src/App.css */
+
+/* 1) Reset margins/padding and force body/html to fill viewport */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* 2) Make <body> a flex container that will fill the entire screen */
+body {
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center;     /* center vertically */
+  background-color: #f5f5f5;
+}
+
+/* 3) Main wrapper to stack the image above the card, and center them */
+.main-wrapper {
+  display: flex;
+  flex-direction: column;   /* stack children top -> bottom */
+  align-items: center;      /* center children horizontally */
+  gap: 1.5rem;              /* space between image and card */
+}
+
+/* 4) Style for the top image, so it’s a fixed size and “separate” */
+.top-image {
+  width: 120px;       /* adjust as needed */
+  height: 120px;      /* adjust as needed */
+  object-fit: contain;/* keep aspect ratio */
+}
+
+/* 5) The white “card” below the image */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 360px;       
+  padding: 2rem 1rem;     
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 6) Username input inside the card */
+.username-input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* 7) Row of buttons (side-by-side) */
+.button-row {
+  display: flex;
+  gap: 0.75rem;         /* space between buttons */
+  width: 100%;
+  justify-content: center;
+}
+
+/* 8) Styling for each button */
+.action-btn {
+  flex: 1;                   /* each button takes equal width */
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #0070f3;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: #005bb5;
+}
