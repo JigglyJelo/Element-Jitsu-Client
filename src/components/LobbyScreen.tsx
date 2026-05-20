@@ -73,7 +73,9 @@ export function LobbyScreen({ lobbyId, onBack, onStartGame }: LobbyScreenProps) 
       socket.off('lobbyUpdate', handleLobbyUpdate);
       socket.off('lobbyReadyUpdate', handleLobbyReady);
     };
-  }, [lobbyId, username, onBack, members.length, host, readyPlayers.length]);
+    // FIX: Removed members.length, host, and readyPlayers.length from dependencies
+    // so this only runs once when the screen loads!
+  }, [lobbyId, username, onBack]);
 
   // Whenever members, host, or readyPlayers changes, recompute canStart:
   useEffect(() => {
