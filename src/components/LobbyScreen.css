@@ -1,79 +1,124 @@
-/* src/App.css */
+/* src/components/LobbyScreen.css */
 
-/* 1) Reset margins/padding and force body/html to fill viewport */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
+.lobby-screen {
+  /* 1) The magic fix: Centers the card absolutely in the middle of the screen */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-/* 2) Make <body> a flex container that will fill the entire screen */
-body {
-  display: flex;
-  justify-content: center; /* center horizontally */
-  align-items: center;     /* center vertically */
-  background-color: #f5f5f5;
-}
-
-/* 3) Main wrapper to stack the image above the card, and center them */
-.main-wrapper {
-  display: flex;
-  flex-direction: column;   /* stack children top -> bottom */
-  align-items: center;      /* center children horizontally */
-  gap: 1.5rem;              /* space between image and card */
-}
-
-/* 4) Style for the top image, so it’s a fixed size and “separate” */
-.top-image {
-  width: 120px;       /* adjust as needed */
-  height: 120px;      /* adjust as needed */
-  object-fit: contain;/* keep aspect ratio */
-}
-
-/* 5) The white “card” below the image */
-.page-wrapper {
+  /* 2) Card layout matching the new light theme */
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
-  max-width: 360px;       
-  padding: 2rem 1rem;     
+  max-width: 400px; /* Slightly wider to comfortably fit the settings */
+  max-height: 90vh; /* Prevents it from going off the screen */
+  overflow-y: auto; /* Adds a scrollbar if the settings get too tall */
+  padding: 2rem 1.5rem;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  color: #333333;
 }
 
-/* 6) Username input inside the card */
-.username-input {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+/* Typography */
+.lobby-screen h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #111111;
+}
+
+.lobby-screen p {
+  text-align: center;
+  color: #555555;
+  margin-top: 0;
   margin-bottom: 1.5rem;
-  box-sizing: border-box;
+  font-size: 0.95rem;
+}
+
+.lobby-screen h3 {
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #111111;
+  border-bottom: 2px solid #f5f5f5;
+  padding-bottom: 0.5rem;
+}
+
+/* Player List Styling */
+.lobby-screen ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.lobby-screen li {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+}
+
+.lobby-screen li:last-child {
+  border-bottom: none;
+}
+
+/* Settings Panel */
+.settings-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.setting-value {
+  font-weight: 700;
+  min-width: 30px;
   text-align: center;
 }
 
-/* 7) Row of buttons (side-by-side) */
-.button-row {
-  display: flex;
-  gap: 0.75rem;         /* space between buttons */
-  width: 100%;
-  justify-content: center;
+/* Host +/- Buttons */
+.small-btn {
+  background-color: #e2e8f0;
+  border: none;
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333333;
+  transition: background-color 0.2s ease;
 }
 
-/* 8) Styling for each button */
+.small-btn:hover {
+  background-color: #cbd5e1;
+}
+
+/* Action Buttons */
 .action-btn {
-  flex: 1;                   /* each button takes equal width */
+  width: 100%;
   padding: 0.75rem 1rem;
   font-size: 1rem;
+  font-weight: 600;
   border: none;
   border-radius: 4px;
   background-color: #0070f3;
   color: #ffffff;
   cursor: pointer;
+  margin-top: 0.5rem;
   transition: background-color 0.2s ease;
 }
 

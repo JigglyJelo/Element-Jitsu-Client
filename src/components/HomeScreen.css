@@ -1,82 +1,239 @@
-/* src/App.css */
+/* src/components/HomeScreen.css */
 
-/* 1) Reset margins/padding and force body/html to fill viewport */
-html,
-body {
+:root {
+  color-scheme: light;
+}
+
+/* 1) Premium Ambient Breathing Background */
+html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
+  /* An over-sized gradient that we will slowly pan across */
+  background: linear-gradient(-45deg, #ffffff, #eef1f5, #e2e8f0, #f8fafc);
+  background-size: 400% 400%;
+  animation: ambientBackground 15s ease-in-out infinite;
+  color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* 2) Make <body> a flex container that will fill the entire screen */
-body {
-  display: flex;
-  justify-content: center; /* center horizontally */
-  align-items: center;     /* center vertically */
-  background-color: #f5f5f5;
+@keyframes ambientBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* 3) Main wrapper to stack the image above the card, and center them */
+/* 2) Main wrapper - Entrance Animation */
 .main-wrapper {
-  display: flex;
-  flex-direction: column;   /* stack children top -> bottom */
-  align-items: center;      /* center children horizontally */
-  gap: 1.5rem;              /* space between image and card */
-}
-
-/* 4) Style for the top image, so it’s a fixed size and “separate” */
-.top-image {
-  width: 120px;       /* adjust as needed */
-  height: 120px;      /* adjust as needed */
-  object-fit: contain;/* keep aspect ratio */
-}
-
-/* 5) The white “card” below the image */
-.page-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 360px;       
-  padding: 2rem 1rem;     
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+  box-sizing: border-box;
+  animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* 6) Username input inside the card */
-.username-input {
+@keyframes fadeUpIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3) TOP SECTION */
+.header-section {
+  flex: 1; 
   width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 1.5rem;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4rem; 
   text-align: center;
 }
 
-/* 7) Row of buttons (side-by-side) */
+.main-title {
+  margin: 0;
+  font-size: 4.5rem; /* Made slightly larger for impact */
+  font-weight: 800;
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  drop-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Floating Elements */
+.element-icons {
+  font-size: 2.75rem;
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
+}
+
+.element-icons span {
+  display: inline-block;
+  animation: float 4s ease-in-out infinite;
+}
+
+.element-icons span:nth-child(1) { animation-delay: 0s; }
+.element-icons span:nth-child(2) { animation-delay: 0.6s; }
+.element-icons span:nth-child(3) { animation-delay: 1.2s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 4) MIDDLE SECTION */
+.middle-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 1.5rem; 
+}
+
+/* The Card - GLASSMORPHISM UPGRADE */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content; 
+  min-width: 400px;       
+  padding: 2.5rem 3rem; 
+  
+  /* The Glass Effect */
+  background-color: rgba(255, 255, 255, 0.7); /* Transparent white */
+  backdrop-filter: blur(16px); /* Blurs what is behind the card */
+  -webkit-backdrop-filter: blur(16px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.8); /* Faint white border */
+  
+  border-radius: 16px; 
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); /* Deep, soft 3D shadow */
+  box-sizing: border-box;
+}
+
+.card-title {
+  margin: 0 0 0.5rem 0; 
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-align: center;
+}
+
+.description-text {
+  margin: 0 0 1.5rem 0; 
+  color: #64748b; 
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+  white-space: nowrap; 
+}
+
+/* Input */
+.username-input {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.9); 
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.username-input:focus {
+  background-color: #ffffff;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 4px rgba(0, 112, 243, 0.15); 
+}
+
+/* Smooth Error Container */
+.error-container {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth slide */
+  width: 100%;
+  text-align: center;
+}
+
+.error-container.show {
+  max-height: 40px; 
+  opacity: 1;
+  margin-top: -1rem; /* Pulls it up tight against the input */
+  margin-bottom: 1.5rem; 
+}
+
+.error-text {
+  color: #dc2626; 
+  font-size: 0.9rem;
+  font-weight: 600;
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* Buttons */
 .button-row {
   display: flex;
-  gap: 0.75rem;         /* space between buttons */
+  gap: 1rem; 
   width: 100%;
   justify-content: center;
 }
 
-/* 8) Styling for each button */
 .action-btn {
-  flex: 1;                   /* each button takes equal width */
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
+  flex: 1; 
+  padding: 0.85rem 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
   border: none;
-  border-radius: 4px;
-  background-color: #0070f3;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #0070f3, #005bb5); /* Premium gradient button */
   color: #ffffff;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 112, 243, 0.25);
 }
 
 .action-btn:hover {
-  background-color: #005bb5;
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 16px rgba(0, 112, 243, 0.4); 
+  filter: brightness(1.1);
+}
+
+.action-btn:active {
+  transform: translateY(0); 
+  box-shadow: 0 2px 4px rgba(0, 112, 243, 0.2);
+}
+
+/* 5) BOTTOM SECTION */
+.footer-wrapper {
+  flex: 1; 
+  display: flex;
+  align-items: flex-end; 
+  justify-content: center;
+  padding-bottom: 2rem; 
+  font-size: 0.9rem;
+}
+
+.github-link {
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.github-link:hover {
+  color: #0070f3;
 }

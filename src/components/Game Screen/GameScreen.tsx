@@ -275,7 +275,7 @@ export function GameScreen({ lobbyId, onBack, players }: GameScreenProps) {
               </ul>
             </div>
           </div>
-          <button className="action-btn" onClick={onBack}>
+          <button className="action-btn return-btn" onClick={onBack}>
             Return to Lobby
           </button>
         </div>
