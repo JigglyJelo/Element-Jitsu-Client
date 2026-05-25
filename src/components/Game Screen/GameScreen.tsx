@@ -69,8 +69,7 @@ export function GameScreen({ lobbyId, onBack, players }: GameScreenProps) {
     }
   }
 
-  // ───────────────────────────────────────────────────────────────────────────────
-  // FLIP ANIMATION STATE FOR OPPONENT’S CARD (unchanged)
+  // FLIP ANIMATION STATE FOR OPPONENT’S CARD
   const [flipOppCard, setFlipOppCard] = useState(false);
 
   useEffect(() => {
@@ -83,7 +82,6 @@ export function GameScreen({ lobbyId, onBack, players }: GameScreenProps) {
       setFlipOppCard(false);
     }
   }, [phase, oppCard]);
-  // ───────────────────────────────────────────────────────────────────────────────
 
   // If lobbySettings aren’t loaded yet, show a loading state
   if (phase === 'pick' && !lobbySettings) {

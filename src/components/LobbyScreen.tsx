@@ -26,7 +26,7 @@ export function LobbyScreen({ lobbyId, onBack, onStartGame }: LobbyScreenProps) 
   const [lobbySettings, setLobbySettings] = useState<LobbySettings | null>(null);
 
   useEffect(() => {
-    // STEP A: join lobby & signal “ready”
+    // Join lobby & signal “ready”
     socket.emit(
       'joinLobby',
       { lobbyId, username },
@@ -44,12 +44,11 @@ export function LobbyScreen({ lobbyId, onBack, onStartGame }: LobbyScreenProps) 
       }
     );
 
-    // STEP B: listen for lobbyUpdate (members + host + lobbySettings)
+    // Listen for lobbyUpdate (members + host + lobbySettings)
     const handleLobbyUpdate = (payload: LobbyUpdatePayload) => {
       setMembers(payload.members);
       setHost(payload.host);
-      setLobbySettings(payload.lobbySettings); // ← pull in the updated settings
-      // Recompute canStart here—(we also do it in the next useEffect)
+      setLobbySettings(payload.lobbySettings);
       setCanStart(
         payload.members.length === 2 &&
           payload.host === username &&
@@ -58,7 +57,7 @@ export function LobbyScreen({ lobbyId, onBack, onStartGame }: LobbyScreenProps) 
     };
     socket.on('lobbyUpdate', handleLobbyUpdate);
 
-    // STEP C: listen for lobbyReadyUpdate
+    // Listen for lobbyReadyUpdate
     const handleLobbyReady = (payload: LobbyReadyPayload) => {
       setReadyPlayers(payload.ready);
       setCanStart(
@@ -73,8 +72,6 @@ export function LobbyScreen({ lobbyId, onBack, onStartGame }: LobbyScreenProps) 
       socket.off('lobbyUpdate', handleLobbyUpdate);
       socket.off('lobbyReadyUpdate', handleLobbyReady);
     };
-    // FIX: Removed members.length, host, and readyPlayers.length from dependencies
-    // so this only runs once when the screen loads!
   }, [lobbyId, username, onBack]);
 
   // Whenever members, host, or readyPlayers changes, recompute canStart:
@@ -87,14 +84,12 @@ export function LobbyScreen({ lobbyId, onBack, onStartGame }: LobbyScreenProps) 
   }, [members, host, readyPlayers, username]);
 
   // ───────────────────────────────────────────────────────────────────────────────
-  // New: rather than computing newVal in the client, we ask the server to bump +1 or –1
   function updateSetting<Field extends keyof LobbySettings>(
     field: Field,
     delta: number
   ): void {
     if (!lobbySettings) return;
 
-    // Tell the server: “host, please add delta to lobbySettings[field], clamp it to 1–99.”
     socket.emit(
       'changeLobbySetting',
       { field, delta },

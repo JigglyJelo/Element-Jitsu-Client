@@ -10,28 +10,22 @@ export interface PlayerScoreboardProps {
   /** Current stats for this player (points and wins per element) */
   stats: PlayerStats;
 
-  /**
-   * How many starting points each element began with (used as the denominator),
-   * so that we can display “Fire 10 / 20”, etc.
-   */
+  /** How many starting points each element began with (used as the denominator)*/
   startingPoints: number;
 
-  /**
-   * How many wins are required to win by duplicates (used for reference, but
-   * in this version we simply render as many cards as there are wins).
-   */
+  /** How many wins are required to win by duplicates (used for reference, but in this version we simply render as many cards as there are wins).*/
   winGoal: number;
 
   /**
    * Where to pin this scoreboard on screen:
-   *   - "left"  → top-left corner
-   *   - "right" → top-right corner
+   *   - "left"  -> top-left corner
+   *   - "right" -> top-right corner
    */
   alignment: 'left' | 'right';
 }
 
 /**
- * Renders a “Club Penguin–style” scoreboard for one player:
+ * Renders a scoreboard for one player:
  *   • username centered at top,
  *   • under it, three element‐blocks (fire, water, grass) in a horizontal row,
  *     each showing the element on one line, then “X / Y” on the next line,

@@ -52,7 +52,7 @@ export function HomeScreen({ onCreate, onJoin }: HomeScreenProps) {
   return (
     <div className="main-wrapper">
       
-      {/* 1. TOP SECTION */}
+      {/* TOP SECTION */}
       <div className="header-section">
         <h1 className="main-title">Element-Jitsu</h1>
         <div className="element-icons">
@@ -62,7 +62,7 @@ export function HomeScreen({ onCreate, onJoin }: HomeScreenProps) {
         </div>
       </div>
 
-      {/* 2. MIDDLE SECTION */}
+      {/* MIDDLE SECTION */}
       <div className="middle-section">
         <div className="page-wrapper">
           
@@ -101,7 +101,7 @@ export function HomeScreen({ onCreate, onJoin }: HomeScreenProps) {
         </div>
       </div>
 
-      {/* 3. BOTTOM SECTION */}
+      {/* BOTTOM SECTION */}
       <div className="footer-wrapper">
         <a 
           href="https://github.com/jigglyjelo/element-jitsu-client" 

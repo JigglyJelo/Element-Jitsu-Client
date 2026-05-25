@@ -24,39 +24,36 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
   const username = getUsername();
   const opponentName = players.find((u) => u !== username) || '';
 
-  // 1) Lobby settings
   const [lobbySettings, setLobbySettings] = useState<LobbySettings | null>(null);
 
-  // 2) Both players’ stats (updated each round/at gameOver)
+  // Both players’ stats (updated each round/at gameOver)
   const [stats, setStats] = useState<Record<string, PlayerStats>>({});
 
-  // 3) Current UI phase
+  //  Current UI phase
   const [phase, setPhase] = useState<Phase>('pick');
 
-  // 4) Local’s choice this round
+  //  Local’s choice this round
   const [selectedElement, setSelectedElement] = useState<MoveElement | null>(null);
   const [selectedPower, setSelectedPower] = useState<number>(0);
 
-  // 5a) Track whether each player has clicked “Choose” (before reveal)
+  // Track whether each player has clicked “Choose” (before reveal)
   const [hasPicked, setHasPicked] = useState<{ [user: string]: boolean }>({});
 
-  // 5b) Once “Choose” is clicked (or server sends roundStats), store actual cards here.
+  //  Once “Choose” is clicked (or server sends roundStats), store actual cards here.
   const [chosenCards, setChosenCards] = useState<{ [user: string]: ChosenCard | null }>({});
 
-  // 6) Game‐over payload + message
-  //    We will hold the incoming payload here, but only switch to `phase='gameOver'` after reveal.
+  // Game‐over payload + message We will hold the incoming payload here, but only switch to `phase='gameOver'` after reveal.
   const [gameOverResult, setGameOverResult] = useState<GameOverPayload | null>(null);
   const [gameOverMessage, setGameOverMessage] = useState<string>('');
 
-  // 7) Whether to show the “round result” text in the header (only after delay)
+  // Whether to show the “round result” text in the header (only after delay)
   const [revealTextVisible, setRevealTextVisible] = useState(false);
 
   // Keep refs to timeouts so we can clear them
   const revealTimeout = useRef<number | null>(null);
   const statsTimeoutRef = useRef<number | null>(null);
 
-  // ───────────────────────────────────────────────────────────────────────────────
-  // A) Initialize chosenCards + hasPicked once opponentName is known
+  // Initialize chosenCards + hasPicked once opponentName is known
   useEffect(() => {
     if (opponentName) {
       setChosenCards({
@@ -70,8 +67,7 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
     }
   }, [opponentName, username]);
 
-  // ───────────────────────────────────────────────────────────────────────────────
-  // B) Fetch settings + register listeners
+  // Fetch settings + register listeners
   useEffect(() => {
     // Fetch LobbySettings once
     socket.emit('getLobbySettings', (settings: LobbySettings | null) => {
@@ -84,7 +80,7 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
       }
     });
 
-    // 1) “playerPicked” from server (opponent or you) – only marks hasPicked
+    // “playerPicked” from server (opponent or you) – only marks hasPicked
     const handlePlayerPicked = (payload: { username: string }) => {
       const picker = payload.username;
       setHasPicked((prev) => {
@@ -94,7 +90,7 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
     };
     socket.on('playerPicked', handlePlayerPicked);
 
-    // 2) “roundStats” when both submitted
+    // “roundStats” when both submitted
     const handleRoundStats = (payload: RoundStatsPayload) => {
       // Re‐initialize chosenCards from payload.moves (in case of race)
       const newChosen: { [user: string]: ChosenCard | null } = {
@@ -112,13 +108,13 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
         [opponentName]: false,
       });
 
-      // ① Switch to ‘reveal’ right away (so the flip‐card CSS can start)
+      // Switch to ‘reveal’ right away (so the flip‐card CSS can start)
       setPhase('reveal');
 
-      // ② Hide the header text until after the flip animation (~700ms)
+      // Hide the header text until after the flip animation (~700ms)
       setRevealTextVisible(false);
 
-      // ③ Delay stats update AND header‐text update until after flip (~700ms)
+      // Delay stats update AND header‐text update until after flip (~700ms)
       if (statsTimeoutRef.current !== null) {
         clearTimeout(statsTimeoutRef.current);
       }
@@ -130,7 +126,7 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
     };
     socket.on('roundStats', handleRoundStats);
 
-    // 3) “gameOver” → store payload, but defer “phase = gameOver”
+    // “gameOver” → store payload, but defer “phase = gameOver”
     const handleGameOver = (payload: GameOverPayload) => {
       // Don’t clear revealTimeout/ statsTimeout here, so that the final‐round reveal can still play.
       // We simply stash the payload and message; we’ll transition to gameOver phase after reveal finishes.
@@ -144,15 +140,15 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
       } else {
         setGameOverMessage('You lost the game. Better luck next time.');
       }
-      // 2) If we’re NOT currently in a “reveal” phase, immediately jump to gameOver.
-      //    If we are in reveal, let the existing revealTimeout effect handle it.
+      // If we’re NOT currently in a “reveal” phase, immediately jump to gameOver.
+      // If we are in reveal, let the existing revealTimeout effect handle it.
       setPhase((currentPhase) => {
         return currentPhase !== 'reveal' ? 'gameOver' : currentPhase;
       });
     };
     socket.on('gameOver', handleGameOver);
 
-    // 3.5) “opponentDisconnected” → instantly force a game-over (skip any reveal)
+    // “opponentDisconnected” → instantly force a game-over (skip any reveal)
     const handleDisconnect = (wrapper: { disconnected: string; gameOver: GameOverPayload }) => {
       const payload = wrapper.gameOver;
       setGameOverResult(payload);
@@ -185,7 +181,7 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
   }, [lobbyId, username, opponentName]);
 
   // ───────────────────────────────────────────────────────────────────────────────
-  // C) Once both chosenCards slots are non‐null, schedule nextRound() or game‐over transition
+  // Once both chosenCards slots are non‐null, schedule nextRound() or game‐over transition
   const nextRound = useCallback(() => {
     setChosenCards({
       [username]: null,
@@ -257,7 +253,6 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
   const yourStats = getStatsOrDefault(username);
   const oppStats = opponentName ? getStatsOrDefault(opponentName) : getStatsOrDefault('');
 
-  // ───────────────────────────────────────────────────────────────────────────────
   // Called when user clicks a radio to select an element
   function selectElement(el: MoveElement) {
     setSelectedElement(el);
@@ -280,13 +275,11 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
     setSelectedPower(Math.min(Math.ceil(availablePts / 2), halfMax));
   }
 
-  // ───────────────────────────────────────────────────────────────────────────────
   // Called when user moves the slider
   function changePower(value: number) {
     setSelectedPower(value);
   }
 
-  // ───────────────────────────────────────────────────────────────────────────────
   // Called when user clicks “Choose”
   function submitMove(card: { element: MoveElement; power: number }) {
     // Emit to server and wait for confirmation before entering “reveal”
@@ -309,7 +302,6 @@ export function useGameScreenLogic(lobbyId: number, players: string[]) {
     );
   }
 
-  // ───────────────────────────────────────────────────────────────────────────────
   // Convert MoveElement → emoji
   function labelElement(el: MoveElement) {
     switch (el) {

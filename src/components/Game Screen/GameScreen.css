@@ -1,8 +1,6 @@
 /* src/components/GameScreen.css */
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Make the game-screen fill the viewport without scrolling and center its content
-───────────────────────────────────────────────────────────────────────────── */
+/* Make the game-screen fill the viewport without scrolling and center its content */
 .game-screen {
   position: relative;
   height: 100vh;
@@ -11,15 +9,12 @@
   padding-top: 4rem;
   box-sizing: border-box;
 
-  /* The Fix: Force everything inside the GameScreen to center horizontally */
   display: flex;
   flex-direction: column;
   align-items: center; 
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Bottom-aligned card container (unchanged)
-───────────────────────────────────────────────────────────────────────────── */
+/* Bottom-aligned card container (unchanged) */
 .element-card-container {
   position: fixed;
   bottom: 1rem;
@@ -42,10 +37,7 @@
   }
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Reveal area: center two large WinCards side by side
-   → Use fixed so it won’t be clipped by .game-screen overflow
-───────────────────────────────────────────────────────────────────────────── */
+/* Reveal area: center two large WinCards side by side */
 .reveal-container {
   position: fixed;
   top: 50%;
@@ -56,9 +48,7 @@
   z-index: 5;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Each reveal “slot” holds either a WinCard or a placeholder
-───────────────────────────────────────────────────────────────────────────── */
+/* Each reveal “slot” holds either a WinCard or a placeholder */
 .reveal-slot {
   width: 120px;
   height: 120px;
@@ -67,9 +57,7 @@
   justify-content: center;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Placeholder box when opponent (or you) hasn’t chosen yet
-───────────────────────────────────────────────────────────────────────────── */
+/* Placeholder box when opponent (or you) hasn’t chosen yet */
 .win-card-placeholder {
   width: 120px;
   height: 120px;
@@ -100,9 +88,7 @@
   color: #000000;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   FLIP-CARD WRAPPER
-───────────────────────────────────────────────────────────────────────────── */
+/* FLIP-CARD WRAPPER */
 .flip-card {
   width: 120px;
   height: 120px;
@@ -135,9 +121,7 @@
   transform: rotateY(180deg);
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Center and style the header (avoids overlap with scoreboards)
-───────────────────────────────────────────────────────────────────────────── */
+/* Center and style the header (avoids overlap with scoreboards) */
 .game-screen h2 {
   text-align: center;
   margin-top: 1rem;
@@ -151,9 +135,7 @@
   color: #555;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Game Over Stats Container - Layout Fix
-───────────────────────────────────────────────────────────────────────────── */
+/* Game Over Stats Container - Layout Fix */
 .stats-container {
   display: flex;
   gap: 2rem;

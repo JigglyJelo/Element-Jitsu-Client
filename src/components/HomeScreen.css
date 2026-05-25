@@ -4,13 +4,11 @@
   color-scheme: light;
 }
 
-/* 1) Premium Ambient Breathing Background */
 html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  /* An over-sized gradient that we will slowly pan across */
   background: linear-gradient(-45deg, #ffffff, #eef1f5, #e2e8f0, #f8fafc);
   background-size: 400% 400%;
   animation: ambientBackground 15s ease-in-out infinite;
@@ -24,7 +22,7 @@ html, body, #root {
   100% { background-position: 0% 50%; }
 }
 
-/* 2) Main wrapper - Entrance Animation */
+/*  Main wrapper - Entrance Animation */
 .main-wrapper {
   display: flex;
   flex-direction: column;
@@ -40,7 +38,7 @@ html, body, #root {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 3) TOP SECTION */
+/* TOP SECTION */
 .header-section {
   flex: 1; 
   width: 100%;
@@ -53,7 +51,7 @@ html, body, #root {
 
 .main-title {
   margin: 0;
-  font-size: 4.5rem; /* Made slightly larger for impact */
+  font-size: 4.5rem;
   font-weight: 800;
   letter-spacing: -2px;
   background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
@@ -86,7 +84,7 @@ html, body, #root {
   50% { transform: translateY(-10px); }
 }
 
-/* 4) MIDDLE SECTION */
+/* MIDDLE SECTION */
 .middle-section {
   display: flex;
   flex-direction: column;
@@ -95,7 +93,7 @@ html, body, #root {
   gap: 1.5rem; 
 }
 
-/* The Card - GLASSMORPHISM UPGRADE */
+/* The Card */
 .page-wrapper {
   display: flex;
   flex-direction: column;
@@ -105,13 +103,13 @@ html, body, #root {
   padding: 2.5rem 3rem; 
   
   /* The Glass Effect */
-  background-color: rgba(255, 255, 255, 0.7); /* Transparent white */
-  backdrop-filter: blur(16px); /* Blurs what is behind the card */
-  -webkit-backdrop-filter: blur(16px); /* Safari support */
-  border: 1px solid rgba(255, 255, 255, 0.8); /* Faint white border */
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   
   border-radius: 16px; 
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); /* Deep, soft 3D shadow */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
 }
 
@@ -159,7 +157,7 @@ html, body, #root {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth slide */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
   text-align: center;
 }
@@ -167,7 +165,7 @@ html, body, #root {
 .error-container.show {
   max-height: 40px; 
   opacity: 1;
-  margin-top: -1rem; /* Pulls it up tight against the input */
+  margin-top: -1rem;
   margin-bottom: 1.5rem; 
 }
 
@@ -217,7 +215,7 @@ html, body, #root {
   box-shadow: 0 2px 4px rgba(0, 112, 243, 0.2);
 }
 
-/* 5) BOTTOM SECTION */
+/* BOTTOM SECTION */
 .footer-wrapper {
   flex: 1; 
   display: flex;

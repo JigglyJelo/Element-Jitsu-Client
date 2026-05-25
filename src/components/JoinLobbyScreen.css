@@ -12,8 +12,6 @@
   border: 1px solid #e2e8f0;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
-
-  /* Centers the card perfectly */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -28,7 +26,6 @@
   text-align: center;
 }
 
-/* Upgraded Input */
 .code-input {
   width: 100%;
   padding: 0.85rem;
@@ -50,7 +47,7 @@
   box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.15);
 }
 
-/* Professional inline error message */
+/* Inline error message */
 .error-text {
   color: #dc2626;
   font-size: 0.85rem;
@@ -73,7 +70,6 @@
   justify-content: center;
 }
 
-/* Upgraded Buttons */
 .action-btn {
   flex: 1;
   padding: 0.85rem 1rem;

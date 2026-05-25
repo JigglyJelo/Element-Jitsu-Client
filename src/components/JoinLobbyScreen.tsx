@@ -10,7 +10,7 @@ export interface JoinLobbyScreenProps {
 
 export function JoinLobbyScreen({ onSubmit, onBack }: JoinLobbyScreenProps) {
   const [codeInput, setCodeInput] = useState<string>('');
-  const [error, setError] = useState<string>(''); // NEW: Error state
+  const [error, setError] = useState<string>('');
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     // Only allow digits as the user types
@@ -48,7 +48,7 @@ export function JoinLobbyScreen({ onSubmit, onBack }: JoinLobbyScreenProps) {
         onChange={handleChange}
         placeholder="e.g. 1234"
         className="code-input"
-        maxLength={6} // Good practice to limit lobby code length
+        maxLength={6}
       />
       
       {/* Conditionally render the error text if it exists */}

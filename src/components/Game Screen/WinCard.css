@@ -1,8 +1,5 @@
-/* ──────────────────────────────────────────────────────────────
-   Base styling for a WinCard
-────────────────────────────────────────────────────────────── */
 .win-card {
-  position: relative;       /* for absolute‐positioning children */
+  position: relative;
   background: #fff;
   border: 2px solid #444;
   border-radius: 0.5rem;
@@ -10,15 +7,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  /* IMPORTANT: ensure border is included inside width/height */
   box-sizing: border-box;
 }
 
-/* ──────────────────────────────────────────────────────────────
-   Small variant (used inside PlayerScoreboard):
-   – exactly 56×56px total (including border)
-────────────────────────────────────────────────────────────── */
+/* Small variant (used inside PlayerScoreboard) exactly 56×56px total (including border) */
 .win-card.small {
   width: 56px;
   height: 56px;
@@ -33,10 +25,7 @@
   }
 }
 
-/* ──────────────────────────────────────────────────────────────
-   Large variant (for “reveal” display):
-   – exactly 120×120px total (including border)
-────────────────────────────────────────────────────────────── */
+/* Large variant (for “reveal” display) exactly 120×120px total (including border) */
 .win-card.large {
   width: 120px;
   height: 120px;
@@ -51,9 +40,7 @@
   }
 }
 
-/* ──────────────────────────────────────────────────────────────
-   Icon (always centered)
-────────────────────────────────────────────────────────────── */
+/* Icon (always centered) */
 .win-icon {
   font-size: 1.25rem;
   line-height: 1;
@@ -63,9 +50,7 @@
   transform: translate(-50%, -50%);
 }
 
-/* ──────────────────────────────────────────────────────────────
-   Power in top-left corner
-────────────────────────────────────────────────────────────── */
+/* Power in top-left corner */
 .win-power-top-left {
   position: absolute;
   top: 4px;
@@ -76,9 +61,7 @@
   line-height: 1;
 }
 
-/* ──────────────────────────────────────────────────────────────
-   Power in bottom-right corner
-────────────────────────────────────────────────────────────── */
+/* Power in bottom-right corner */
 .win-power-bottom-right {
   position: absolute;
   bottom: 4px;
